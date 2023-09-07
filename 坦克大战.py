@@ -1,4 +1,4 @@
-#   导入模块，文件......最好不要修改
+#   导入模块，文件
 from typing import Any
 import pygame
 import os
@@ -6,7 +6,7 @@ import random
 from pygame.sprite import Group
 from bullt import Bullet
 from player import Player
-#   一些变量，不想报错就别弄
+#   一些变量
 FPS = 60
 WIDTH = 1000
 HEIGHT = 600
