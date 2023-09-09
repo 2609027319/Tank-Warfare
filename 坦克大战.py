@@ -1,4 +1,4 @@
-#   导入模块，文件
+#   导入模块，文件......
 from typing import Any
 import pygame
 import os
@@ -407,7 +407,7 @@ class Wall(pygame.sprite.Sprite):
                 bullet.kill()
 
 class Iron(pygame.sprite.Sprite):
-    def __init__(self) -> None:
+    def __init__(self,enemy_tank_group) -> None:
         super().__init__()
         self.images = ("img/scene/iron.png")
         self.image = pygame.image.load(self.images)
@@ -415,6 +415,13 @@ class Iron(pygame.sprite.Sprite):
         self.rect.centerx = random.randint(50, 1000)
         self.rect.centery = random.randint(0, WIDTH - self.rect.width)
         self.rect.inflate_ip(-10, -10)
+        while True:
+            self.rect.centerx = random.randint(50, 1000)
+            self.rect.centery = random.randint(0, WIDTH - self.rect.width)
+            if (not pygame.sprite.spritecollideany(self, enemy_tank_group) and 
+                not pygame.sprite.collide_mask(self, player) and
+                not pygame.sprite.collide_mask(self, player1)):
+                break
     def update(self):
         for bullet in bullet_group:
             if self is not None and pygame.sprite.collide_circle(bullet,self):
@@ -529,7 +536,7 @@ for position in wall_positions:
     wall_group.add(wall)
 
 for s in range(Number_of_iron):
-    iron = Iron()
+    iron = Iron(enemy_tank_group)
     iron_group.add(iron)
 
 #  计时器
